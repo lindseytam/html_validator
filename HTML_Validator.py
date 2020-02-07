@@ -49,12 +49,15 @@ def _extract_tags(html):
     tags = []
     start = html.find('<')
 
-    if len(html) == 0:
+    if len(html) == 0 or start == -1:
+        if html.find('>') != -1:
+            tags.append('>')
         print(tags)
         return tags
 
     if len(html) == 1 and (html.find('<') != -1 or html.find('>') != -1):
         tags.append(html)
+        print(tags)
         return tags
 
 
@@ -64,14 +67,22 @@ def _extract_tags(html):
     while index < len(html):
 
         # close bracket, append tag, and find next instance of open bracket
-        if html[index] == '>' or html[index] == ' ':
+        if html[index] == '>':
             tags.append(html[start:index+1])
             start = html.find('<', index)
 
 
         index += 1
 
+    if start != -1:
+        tags.append(html[start])
+
+
     print(tags)
     return tags
 
 
+# html = 'this is a <strong test'
+html = '<html><head><title>This is an awesome webpage!</title></head><body><p>Programming is the <strong>best</strong>!</p></body></html>'
+_extract_tags(html)
+validate_html(html)
