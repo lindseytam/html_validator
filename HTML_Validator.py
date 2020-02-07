@@ -51,7 +51,7 @@ def _extract_tags(html):
         return tags
 
     # find first instance of open angle bracket
-    start = html.find('<')
+    start = html.find('<') 
     index = start
 
     while index < len(html):
