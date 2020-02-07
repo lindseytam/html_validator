@@ -73,8 +73,8 @@ def _extract_tags(html):
 
         index += 1
 
-    # if start != -1:
-    #     tags.append(html[start])
+    if start != -1:
+        tags.append(html[start])
 
     print(tags)
     return tags
