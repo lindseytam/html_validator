@@ -13,6 +13,7 @@ def validate_html(html):
 
     # if there's an odd number of tags, no need to compute anything
     if len(all_tags) % 2 == 1:
+        print("False")
         return False
 
     j = 0
@@ -46,21 +47,35 @@ def _extract_tags(html):
 
     # list of html tags to be returned
     tags = []
+    start = html.find('<')
 
     if len(html) == 0:
+        print(tags)
         return tags
 
+    if len(html) == 1 and (html.find('<') != -1 or html.find('>') != -1):
+        tags.append(html)
+        return tags
+
+
     # find first instance of open angle bracket
-    start = html.find('<') 
     index = start
 
     while index < len(html):
 
         # close bracket, append tag, and find next instance of open bracket
-        if html[index] == '>':
+        if html[index] == '>' or html[index] == ' ':
             tags.append(html[start:index+1])
             start = html.find('<', index)
 
+
         index += 1
+
+    print(tags)
     return tags
 
+
+# html = 'this is a <strong test'
+html = 'this is a <strong test'
+_extract_tags(html)
+validate_html(html)
