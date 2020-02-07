@@ -75,7 +75,3 @@ def _extract_tags(html):
     return tags
 
 
-# html = 'this is a <strong test'
-html = 'this is a <strong test'
-_extract_tags(html)
-validate_html(html)
