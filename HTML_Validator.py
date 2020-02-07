@@ -11,11 +11,27 @@ def validate_html(html):
     False
     '''
 
-    # HINT:
-    # use the _extract_tags function below to generate a list of html tags without any extra text;
-    # then process these html tags using the balanced parentheses algorithm from the book
-    # the main difference between your code and the book's code will be that you will have to keep track of not just the 3 types of parentheses,
-    # but arbitrary text located between the html tags
+
+    all_tags = _extract_tags(html)
+
+    # if there's an odd number of tags, no need to compute anything
+    if len(all_tags) % 2 == 1:
+        return False
+    j = 0
+
+    while len(all_tags) > 0 and j < len(all_tags) - 1:
+
+        # deals with </>
+        tmp_tag = all_tags[j + 1].replace("/", "")
+
+        if all_tags[j] == tmp_tag:
+            del all_tags[j + 1]
+            del all_tags[j]
+            j -= 1
+        else:
+            j += 1
+
+    return len(all_tags) == 0
 
 
 def _extract_tags(html):
@@ -28,4 +44,25 @@ def _extract_tags(html):
 
     >>> _extract_tags('Python <strong>rocks</strong>!')
     ['<strong>', '</strong>']
+
     '''
+
+    # list of html tags to be returned
+    tags = []
+
+    # find first instance of open angle bracket
+    start = html.find('<')
+    index = start
+
+    while index < len(html):
+
+        # close bracket, append tag, and find next instance of open bracket
+        if html[index] == '>':
+            tags.append(html[start:index+1])
+            start = html.find('<', index)
+
+        index += 1
+
+    return tags
+
+validate_html('<strong>example')
