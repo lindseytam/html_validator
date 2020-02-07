@@ -8,11 +8,10 @@ def validate_html(html):
     False
     '''
 
-
     all_tags = _extract_tags(html)
-
+    
     # if there's an odd number of tags, no need to compute anything
-    if len(all_tags) % 2 == 1:
+    if len(all_tags) % 2 == 1 or html.count(">") % 2 == 1 or html.count("<") % 2 == 1:
         print("False")
         return False
 
@@ -49,16 +48,18 @@ def _extract_tags(html):
     tags = []
     start = html.find('<')
 
-    if len(html) == 0 or start == -1:
-        if html.find('>') != -1:
-            tags.append('>')
-        print(tags)
+    if len(html) == 0:
         return tags
-
-    if len(html) == 1 and (html.find('<') != -1 or html.find('>') != -1):
-        tags.append(html)
-        print(tags)
-        return tags
+    # if len(html) == 0 or start == -1:
+    #     if html.find('>') != -1:
+    #         tags.append('>')
+    #     print(tags)
+    #     return tags
+    #
+    # if len(html) == 1 and (html.find('<') != -1 or html.find('>') != -1):
+    #     tags.append(html)
+    #     print(tags)
+    #     return tags
 
 
     # find first instance of open angle bracket
@@ -74,8 +75,8 @@ def _extract_tags(html):
 
         index += 1
 
-    if start != -1:
-        tags.append(html[start])
+    # if start != -1:
+    #     tags.append(html[start])
 
 
     print(tags)
@@ -83,6 +84,6 @@ def _extract_tags(html):
 
 
 # html = 'this is a <strong test'
-html = '<html><head><title>This is an awesome webpage!</title></head><body><p>Programming is the <strong>best</strong>!</p></body></html>'
+html = '<'
 _extract_tags(html)
 validate_html(html)
