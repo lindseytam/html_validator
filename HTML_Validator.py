@@ -9,9 +9,14 @@ def validate_html(html):
     '''
 
     all_tags = _extract_tags(html)
-    
+
+    # html.count(">") % 2 == 1 or \
+    # html.count(">") % 2 == 1 or \
     # if there's an odd number of tags, no need to compute anything
-    if len(all_tags) % 2 == 1 or html.count(">") % 2 == 1 or html.count("<") % 2 == 1:
+    if len(all_tags) % 2 == 1 or \
+        html.count(">") > len(all_tags) or \
+        html.count("<") > len(all_tags):
+        # html.count("<") % 2 == 1:
         print("False")
         return False
 
@@ -48,7 +53,8 @@ def _extract_tags(html):
     tags = []
     start = html.find('<')
 
-    if len(html) == 0:
+    if len(html) == 0 or start == -1:
+        print(tags)
         return tags
     # if len(html) == 0 or start == -1:
     #     if html.find('>') != -1:
@@ -62,6 +68,7 @@ def _extract_tags(html):
     #     return tags
 
 
+
     # find first instance of open angle bracket
     index = start
 
@@ -72,18 +79,14 @@ def _extract_tags(html):
             tags.append(html[start:index+1])
             start = html.find('<', index)
 
-
         index += 1
 
     # if start != -1:
     #     tags.append(html[start])
 
-
     print(tags)
     return tags
 
-
-# html = 'this is a <strong test'
-html = '<'
+html = '>'
 _extract_tags(html)
 validate_html(html)
