@@ -1,6 +1,5 @@
 #!/bin/python3
 
-
 def validate_html(html):
     '''
     This function performs a limited version of html validation by checking whether every opening tag has a corresponding closing tag.
