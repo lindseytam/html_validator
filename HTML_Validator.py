@@ -1,5 +1,3 @@
-#!/bin/python3
-
 def validate_html(html):
     '''
     This function performs a limited version of html validation by checking whether every opening tag has a corresponding closing tag.
@@ -16,20 +14,20 @@ def validate_html(html):
     # if there's an odd number of tags, no need to compute anything
     if len(all_tags) % 2 == 1:
         return False
+
     j = 0
 
     while len(all_tags) > 0 and j < len(all_tags) - 1:
 
-        # deals with </>
-        tmp_tag = all_tags[j + 1].replace("/", "")
-
-        if all_tags[j] == tmp_tag:
+        if all_tags[j] == all_tags[j + 1].replace("/", "") and len(all_tags[j]) < len(all_tags[j+1]):
             del all_tags[j + 1]
             del all_tags[j]
+            print(all_tags)
             j -= 1
         else:
             j += 1
 
+    print(len(all_tags) == 0)
     return len(all_tags) == 0
 
 
@@ -64,4 +62,4 @@ def _extract_tags(html):
 
     return tags
 
-validate_html('<strong>example')
+validate_html('<strong><strong></strong></strong>')
