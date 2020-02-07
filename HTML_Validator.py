@@ -50,7 +50,7 @@ def _extract_tags(html):
     start = html.find('<')
     index = start
 
-    while index < len(html):
+    while index < len(html)-1:
 
         # close bracket, append tag, and find next instance of open bracket
         if html[index] == '>':
