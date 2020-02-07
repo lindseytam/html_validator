@@ -8,7 +8,6 @@ def validate_html(html):
     False
     '''
 
-
     all_tags = _extract_tags(html)
 
     # if there's an odd number of tags, no need to compute anything
