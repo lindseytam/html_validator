@@ -57,7 +57,8 @@ def _extract_tags(html):
         print(tags)
         return tags
 
-#     if html.count(">") != html.count("<"):
+    if html.count(">") != html.count("<"):
+        return tags
 #         raise ValueError('found < without matching >')
 
 
