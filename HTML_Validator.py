@@ -62,8 +62,8 @@ def _extract_tags(html):
     
     
     if html.count(">") != html.count("<"):
-#         raise ValueError('found < without matching >')
-        return 'found < without matching >'
+        raise ValueError('I found < without matching >')
+#         return 'found < without matching >'
 
     # find first instance of open angle bracket
     index = start
