@@ -57,11 +57,8 @@ def _extract_tags(html):
         print(tags)
         return tags
 
-#     if html.count(">") != html.count("<"):
-#         raise ValueError('found < without matching >')
-
-    with pytest.raises(ValueError, match='found < without matching >'):
-        html.count(">") != html.count("<")
+    if html.count(">") != html.count("<"):
+        raise ValueError('found < without matching >')
 
 
     # find first instance of open angle bracket
