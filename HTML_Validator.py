@@ -50,7 +50,7 @@ def _extract_tags(html):
     '''
 
     # list of html tags to be returned
-    tags = ['<']
+    tags = []
     start = html.find('<')
 
     if len(html) == 0 or start == -1:
@@ -73,10 +73,10 @@ def _extract_tags(html):
 
         index += 1
 
-    if start != -1:
-        tags.append(html[start])
+#     if start != -1:
+#         tags.append(html[start])
 
-    print(tags)
+#     print(tags)
     return tags
 
 
