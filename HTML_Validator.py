@@ -48,8 +48,10 @@ def validate_html(html):
                 if top != tag:
                     return False
 
-    return True
-
+    if s.isEmpty():
+        return True
+    
+    return False
 
 def _extract_tags(html):
     '''
