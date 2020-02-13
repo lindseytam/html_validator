@@ -29,7 +29,7 @@ def validate_html(html):
     False
     '''
 
-        try:
+    try:
         s = Stack()
         all_tags = _extract_tags(html)
         for tag in all_tags:
