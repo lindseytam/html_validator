@@ -29,29 +29,32 @@ def validate_html(html):
     False
     '''
 
-    s = Stack()
-    all_tags = _extract_tags(html)
+        try:
+        s = Stack()
+        all_tags = _extract_tags(html)
+        for tag in all_tags:
 
-    for tag in all_tags:
-
-        if not tag.__contains__('/'):
-            s.push(tag)
-
-        else:
-            if s.isEmpty():
-                return False
+            if not tag.__contains__('/'):
+                s.push(tag)
 
             else:
-                tag = tag.replace("/", "")
-                top = s.pop()
-
-                if top != tag:
+                if s.isEmpty():
                     return False
 
-    if s.isEmpty():
-        return True
-    
-    return False
+                else:
+                    tag = tag.replace("/", "")
+                    top = s.pop()
+
+                    if top != tag:
+                        return False
+
+        if s.isEmpty():
+            return True
+
+        return False
+
+    except ValueError:
+        return False
 
 def _extract_tags(html):
     '''
