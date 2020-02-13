@@ -69,30 +69,24 @@ def _extract_tags(html):
 
     '''
 
-    # list of html tags to be returned
     tags = []
     start = html.find('<')
 
     if len(html) == 0 or start == -1:
-        print(tags)
         return tags
     
     if html.count(">") != html.count("<"):
         raise ValueError('found < without matching >')
 
-
-    # find first instance of open angle bracket
     index = start
 
     while index < len(html):
 
-        # close bracket, append tag, and find next instance of open bracket
         if html[index] == '>':
             tags.append(html[start:index+1])
             start = html.find('<', index)
 
         index += 1
-
 
     return tags
 
