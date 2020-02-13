@@ -10,32 +10,26 @@ def validate_html(html):
     False
     '''
 
+    s = Stack()
     all_tags = _extract_tags(html)
 
-    # html.count(">") % 2 == 1 or \
-    # html.count(">") % 2 == 1 or \
-    # if there's an odd number of tags, no need to compute anything
-    if len(all_tags) % 2 == 1 or \
-        html.count(">") > len(all_tags) or \
-        html.count("<") > len(all_tags):
-        # html.count("<") % 2 == 1:
-        print("False")
-        return False
+    for tag in all_tags:
 
-    j = 0
+        if not tag.__contains__('/'):
+            s.push(tag)
 
-    while len(all_tags) > 0 and j < len(all_tags) - 1:
-
-        if all_tags[j] == all_tags[j + 1].replace("/", "") and len(all_tags[j]) < len(all_tags[j+1]):
-            del all_tags[j + 1]
-            del all_tags[j]
-            print(all_tags)
-            j -= 1
         else:
-            j += 1
+            if s.isEmpty():
+                return False
 
-    print(len(all_tags) == 0)
-    return len(all_tags) == 0
+            else:
+                tag = tag.replace("/", "")
+                top = s.pop()
+
+                if top != tag:
+                    return False
+
+    return True
 
 
 def _extract_tags(html):
